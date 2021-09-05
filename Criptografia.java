@@ -117,12 +117,16 @@ public class Criptografia {
         );
     }
 
-    private String gerarFraseDescriptografada(int[] arrCodificacao, int[] arrChaveCriptografia) {
+    private String gerarFraseDescriptografada(int[] arrCodificacao, int[] arrChaveCriptografia) throws Exception {
         String fraseDescriptografada = "";
         
         for (int i = 0; i < arrCodificacao.length; i++) {
             int posicaoChaveCriptografia = i % TAMANHO_CHAVE_CODIFICACAO;
             int codificacao = arrCodificacao[i] - arrChaveCriptografia[posicaoChaveCriptografia];
+
+            if (codificacao < 0) {
+                throw new Exception("Chave de criptografia inválida");
+            }
 
             fraseDescriptografada += TABELA_CODIFICACAO.charAt(codificacao);
         }

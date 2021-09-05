@@ -102,6 +102,31 @@ public class Criptografia {
     }
 
     public String descriptografar(String fraseCriptografada, String chaveCriptografia) throws Exception {
-        throw new Exception("Método ainda não implementado");
+        int[] arrCodificacao = this.getArrCodificacaoFromFrase(fraseCriptografada);
+        
+        // Converte String para array e transforma os elementos em int
+        int[] arrChaveCriptografia = Arrays.stream(chaveCriptografia.split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        if (arrChaveCriptografia.length != TAMANHO_CHAVE_CODIFICACAO) {
+            throw new Exception("Chave de criptografia inválida");
+        }
+
+        return String.format(
+            "Frase descriptografada: [%s]",
+            this.gerarFraseDescriptografada(arrCodificacao, arrChaveCriptografia).trim()
+        );
+    }
+
+    private String gerarFraseDescriptografada(int[] arrCodificacao, int[] arrChaveCriptografia) {
+        String fraseDescriptografada = "";
+        
+        for (int i = 0; i < arrCodificacao.length; i++) {
+            int posicaoChaveCriptografia = i % TAMANHO_CHAVE_CODIFICACAO;
+            int codificacao = arrCodificacao[i] - arrChaveCriptografia[posicaoChaveCriptografia];
+
+            fraseDescriptografada += TABELA_CODIFICACAO.charAt(codificacao);
+        }
+
+        return fraseDescriptografada;
     }
 }

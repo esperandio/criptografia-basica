@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+    openjdk:
+        image: openjdk
+        command: tail -f /dev/null
+        working_dir: /criptografia-basica
+        volumes:
+            - ./:/criptografia-basica
+            - openjdk-16:/usr/java/openjdk-16
+        container_name: openjdk
+volumes:
+    openjdk-16:

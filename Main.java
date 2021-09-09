@@ -8,7 +8,13 @@ public class Main {
     private static Scanner input;
 
     public static void main(String[] args) {
-        input = new Scanner(System.in).useDelimiter("\n");
+        String delimiter = "\n";
+
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            delimiter = "\r\n";
+        }
+
+        input = new Scanner(System.in).useDelimiter(delimiter);
 
         mostrarMenuOpcoes();
     }

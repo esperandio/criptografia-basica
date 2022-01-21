@@ -22,6 +22,8 @@ public class Main {
     private static void mostrarMenuOpcoes() {
         String opcao = "";
 
+        System.out.println("Teste");
+
         while (!opcao.equals(OPCAO_SAIR)) {
             System.out.println("1 - Criptografar");
             System.out.println("2 - Descriptografar");
